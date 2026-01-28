@@ -5,37 +5,31 @@ function gerarAssinatura() {
   const whatsapp = document.getElementById("whatsapp").value;
   const fotoInput = document.getElementById("foto");
 
-  if (!fotoInput.files[0]) {
-    alert("Por favor, envie uma foto.");
+  if (!fotoInput.files || !fotoInput.files[0]) {
+    alert("Selecione uma foto.");
     return;
   }
 
-  const reader = new FileReader();
+  const fotoURL = URL.createObjectURL(fotoInput.files[0]);
 
-  reader.onload = function (e) {
-    const fotoBase64 = e.target.result;
+  const assinaturaHTML = `
+    <table cellpadding="0" cellspacing="0" style="font-family: Arial; font-size: 12px;">
+      <tr>
+        <td style="padding-right:10px;">
+          <img src="${fotoURL}" width="100" style="border-radius:50%;">
+        </td>
+        <td>
+          <strong>${nome}</strong><br>
+          ${cargo}<br><br>
+          Email: ${email}<br>
+          WhatsApp: ${whatsapp}<br><br>
+          <img src="assets/logo.png" width="140">
+        </td>
+      </tr>
+    </table>
+  `;
 
-    const assinaturaHTML = `
-      <table cellpadding="0" cellspacing="0" style="font-family: Arial; font-size: 12px;">
-        <tr>
-          <td style="padding-right:10px;">
-            <img src="${fotoBase64}" width="100" style="border-radius:50%;">
-          </td>
-          <td>
-            <strong>${nome}</strong><br>
-            ${cargo}<br><br>
-            📧 ${email}<br>
-            📱 ${whatsapp}<br><br>
-            <img src="assets/logo.png" width="120">
-          </td>
-        </tr>
-      </table>
-    `;
-
-    document.getElementById("preview").innerHTML = assinaturaHTML;
-  };
-
-  reader.readAsDataURL(fotoInput.files[0]);
+  document.getElementById("preview").innerHTML = assinaturaHTML;
 }
 
 function copiarAssinatura() {
@@ -52,6 +46,5 @@ function copiarAssinatura() {
   window.getSelection().addRange(range);
 
   document.execCommand("copy");
-  alert("Assinatura copiada! Cole no seu e-mail.");
+  alert("Assinatura copiada com sucesso!");
 }
-
