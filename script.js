@@ -28,42 +28,38 @@ function gerarAssinatura() {
   reader.onload = function(e) {
     const fotoBase64 = e.target.result;
 
-    const assinaturaHTML = `
-<table cellpadding="0" cellspacing="0" style="font-family:'Open Sans', Arial, sans-serif; font-size:13px; color:#5b5b5b;">
-  <tr>
-    <td style="border-left:5px solid #23bbbe; padding-left:15px;">
-      <table cellpadding="0" cellspacing="0">
-        <tr>
-          <td style="padding-right:12px;">
-            <img src="${fotoBase64}" width="90" style="border-radius:50%;">
-          </td>
-          <td>
-            <strong style="font-size:15px; color:#2C9098;">${nome}</strong><br>
-            <span style="color:#5b5b5b;">${cargo}</span><br><br>
+const assinaturaHTML =
+'<table cellpadding="0" cellspacing="0" style="font-family:Open Sans, Arial, sans-serif; font-size:13px; color:#5b5b5b;">' +
+  '<tr>' +
+    '<td style="padding:10px 0;">' +
+      '<table cellpadding="0" cellspacing="0">' +
+        '<tr>' +
+          '<td style="padding-right:14px; vertical-align:top;">' +
+            '<img src="' + fotoBase64 + '" width="80" style="border-radius:50%;">' +
+          '</td>' +
+          '<td style="vertical-align:top;">' +
 
-            <span style="color:#2C9098;">E-mail:</span> 
-            <a href="mailto:${email}" style="color:#23bbbe; text-decoration:none;">
-              ${email}
-            </a><br>
+            '<div style="font-size:15px; font-weight:700; color:#2C9098;">' + nome + '</div>' +
+            '<div style="font-size:13px; color:#5b5b5b; margin-bottom:8px;">' + cargo + '</div>' +
 
-            <span style="color:#2C9098;">WhatsApp:</span> 
-            <a href="https://wa.me/${whatsappFormatado}" style="color:#23bbbe; text-decoration:none;">
-              ${whatsapp}
-            </a><br>
+            '<div style="font-size:12px; color:#5b5b5b;">' +
+              '<a href="mailto:' + email + '" style="color:#5b5b5b; text-decoration:none;">' + email + '</a>' +
+              ' | ' +
+              '<a href="https://wa.me/' + whatsappFormatado + '" style="color:#23bbbe; text-decoration:none;">' + whatsapp + '</a>' +
+              ' | ' +
+              '<a href="https://kikker.com.br" style="color:#23bbbe; text-decoration:none;">kikker.com.br</a>' +
+            '</div>' +
 
-            <span style="color:#2C9098;">Site:</span> 
-            <a href="https://kikker.com.br" style="color:#23bbbe; text-decoration:none;">
-              kikker.com.br
-            </a><br><br>
+            '<div style="margin-top:10px;">' +
+              '<img src="assets/logo.png" width="110">' +
+            '</div>' +
 
-            <img src="assets/logo.png" width="120">
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-    `;
+          '</td>' +
+        '</tr>' +
+      '</table>' +
+    '</td>' +
+  '</tr>' +
+'</table>';
 
     document.getElementById("preview").innerHTML = assinaturaHTML;
   };
