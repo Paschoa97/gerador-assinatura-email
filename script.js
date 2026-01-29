@@ -15,6 +15,14 @@ function gerarAssinatura() {
     return;
   }
 
+  // Remove tudo que não for número do WhatsApp
+  const whatsappNumeros = whatsapp.replace(/\D/g, "");
+
+  // Adiciona DDI 55 se não existir
+  const whatsappFormatado = whatsappNumeros.startsWith("55")
+    ? whatsappNumeros
+    : "55" + whatsappNumeros;
+
   const reader = new FileReader();
 
   reader.onload = function(e) {
@@ -33,8 +41,20 @@ function gerarAssinatura() {
             <strong style="font-size:15px; color:#2C9098;">${nome}</strong><br>
             <span style="color:#5b5b5b;">${cargo}</span><br><br>
 
-            <span style="color:#2C9098;">E-mail:</span> ${email}<br>
-            <span style="color:#2C9098;">WhatsApp:</span> ${whatsapp}<br><br>
+            <span style="color:#2C9098;">E-mail:</span> 
+            <a href="mailto:${email}" style="color:#23bbbe; text-decoration:none;">
+              ${email}
+            </a><br>
+
+            <span style="color:#2C9098;">WhatsApp:</span> 
+            <a href="https://wa.me/${whatsappFormatado}" style="color:#23bbbe; text-decoration:none;">
+              ${whatsapp}
+            </a><br>
+
+            <span style="color:#2C9098;">Site:</span> 
+            <a href="https://kikker.com.br" style="color:#23bbbe; text-decoration:none;">
+              kikker.com.br
+            </a><br><br>
 
             <img src="assets/logo.png" width="120">
           </td>
